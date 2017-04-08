@@ -1,6 +1,7 @@
 
 import os, json, re
 import flask
+import random
 
 from flask import (
 	Flask, 
@@ -13,15 +14,19 @@ from flask import (
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def main():
-	return render_template("Hangman.html")
+	if request.method == 'GET':  
+		return render_template("Hangman.html")
+	else:
+		return redirect(url_for('game'))
 
 @app.route('/game', methods=['GET', 'POST'])
 def game():
-	 words = ['red', 'blue', 'green']
-	 random_word = (random.choice(words))
-	 return render_template("game.html",random_word)
+	words = ['red', 'blue', 'green']
+	random_word = (random.choice(words))
+	return render_template("game.html",random_word=random_word)
+	
 
 if __name__ == "__main__":
-	app.run()
+	app.run(debug=True)
