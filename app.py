@@ -26,40 +26,55 @@ def main():
 
 @app.route('/setup', methods=['GET','POST'])
 def setup():
-	words = ['red', 'blue', 'green']
+	words = ['red', 'blue', 'green' , 'abcdefghabci']
 	session['random_word'] = (random.choice(words))
 	session['Word_length'] = len(session['random_word'])
 	session['blank_word'] = "_ " * session['Word_length']
 	session['blank_list'] = session['blank_word'].split()
-	session['Word_list']= list(session['random_word'])  
+	session['Word_list'] = list(session['random_word'])  
+	session['Counter'] = 0
 	return render_template("setup.html",random_word=session['random_word'],
 		Word_list=session['Word_list'],blank_list=session['blank_list'])
-	
 
 @app.route('/game', methods=['GET','POST'])
 def game():
 	if request.method == 'POST': 
-		session['textbox']=request.form['text']
-		#print(session['textbox'])
-		Word_list=session.get('Word_list',None)
-		blank_list=session.get('blank_list',None)
-		letter_choice=session.get('textbox',None)
-		for i, j in enumerate(Word_list):
-			if j==letter_choice:
-				blank_list[i]=letter_choice
-		return render_template("game.html",blank_list=session['blank_list'])
+		if session['Counter'] < 8:
+			session['textbox']=request.form['text']
+			#print(session['textbox'])
+			Word_list=session.get('Word_list',None)
+			blank_list=session.get('blank_list',None)
+			letter_choice=session.get('textbox',None)
+			if re.match("^[a-z]*$", letter_choice) and len(letter_choice) == 1:
+				for i, j in enumerate(Word_list):
+					if j==letter_choice:
+						blank_list[i]=letter_choice
+						if blank_list == Word_list:
+							session['game_status'] = 'won'
+							return redirect(url_for('done'))
+				session['Counter'] = session['Counter'] + 1
+				return render_template("game.html",blank_list=session['blank_list'])
+			else:
+				error="Error! Only letters a-z and 1 characters allowed!, try again"
+				session['Counter'] = session['Counter'] + 1
+				return render_template("game.html",blank_list=session['blank_list'],error=error)
 	#textbox = session.get('textbox', None)
 	#return render_template("game.html",textbox=textbox)
+		else:
+			session['game_status'] = 'lost'
+			return redirect(url_for('done'))
+
+@app.route('/done', methods=['GET','POST'])
+def done():
+	message=" You " +session['game_status'] +". You had a total of " + str(session['Counter']) + " tries. Would you like to try again?"
+	return render_template("done.html",message=message)
 
 if __name__ == "__main__":
 	app.run(debug=True)
 
 """
-one char lowercase tell if wrong
-limited chances and visual image
+visual image
 get words from word api
 choose diffculty
 topic
-try again
-you won/lost
 deploy app to heroku"""
