@@ -26,15 +26,19 @@ def main():
 
 @app.route('/setup', methods=['GET','POST'])
 def setup():
-	words = ['red', 'blue', 'green' , 'abcdefghabci']
-	session['random_word'] = (random.choice(words))
+	text_file = open('Hardwords.txt',"r")
+	words = text_file.read().split(',')
+	session['random_word'] = random.choice(words).lower()
+	text_file.close()
+	#words = ['red', 'blue', 'green' , 'abcdefghabci']
+	#session['random_word'] = (random.choice(words))
 	session['Word_length'] = len(session['random_word'])
 	session['blank_word'] = "_ " * session['Word_length']
 	session['blank_list'] = session['blank_word'].split()
 	session['Word_list'] = list(session['random_word'])  
 	session['Counter'] = 0
 	return render_template("setup.html",random_word=session['random_word'],
-		Word_list=session['Word_list'],blank_list=session['blank_list'])
+		Word_list=session['Word_list'],blank_word=session['blank_word'],words=words,Word_length=session['Word_length'])
 
 @app.route('/game', methods=['GET','POST'])
 def game():
@@ -45,6 +49,7 @@ def game():
 			Word_list=session.get('Word_list',None)
 			blank_list=session.get('blank_list',None)
 			letter_choice=session.get('textbox',None)
+			letter_choice=letter_choice.lower()
 			if re.match("^[a-z]*$", letter_choice) and len(letter_choice) == 1:
 				for i, j in enumerate(Word_list):
 					if j==letter_choice:
@@ -53,7 +58,7 @@ def game():
 							session['game_status'] = 'won'
 							return redirect(url_for('done'))
 				session['Counter'] = session['Counter'] + 1
-				return render_template("game.html",blank_list=session['blank_list'])
+				return render_template("game.html",blank_list=session['blank_list'], letter_choice=letter_choice)
 			else:
 				error="Error! Only letters a-z and 1 characters allowed!, try again"
 				session['Counter'] = session['Counter'] + 1
