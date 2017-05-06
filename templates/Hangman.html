@@ -4,10 +4,16 @@
 
 <h2>Hangman By:Rahma Ahmed</h2>
 
-<form action="{{ url_for('setup') }}" method="POST" id="form1">
+<h2>choose diffculty level Hard or Average</h2>
+
+<form action="{{ url_for('main') }}" method="POST">
+		<input type="submit" name="difficulty" value="Normal">
+		<input type="submit" name="difficulty" value="Hard">
 </form>
 
-<button type="submit" form="form1" value="Submit">Submit</button>
+<form action="{{ url_for('setup') }}" method="POST">
+		<input type="submit" name="form1" value="Submit">
+</form>
 
 </body>
 </html>

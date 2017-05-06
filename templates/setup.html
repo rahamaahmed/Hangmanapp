@@ -8,20 +8,6 @@
 <p>{{words}}</p>
 <p>{{Word_length}}</p>
 
-<!--
-<form action="{{ url_for('game') }}" method="POST" id="form1">
-<input type="text" name="text">
-</form>
-
-<button type="submit" form="form1" value="Submit">Submit</button>
-
-<form action="{{ url_for('game') }}" method="POST">
-  letter:<br>
-  <input type="text" name="text">
-  <br>
-  <input type="submit" value="Submit">
-</form> -->
-
  <form action="{{ url_for('game') }}" method="POST">
         <input type="text" name="text">
         <input type="submit" name="my-game" value="Send">
