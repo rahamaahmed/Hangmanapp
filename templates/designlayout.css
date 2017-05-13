@@ -1,0 +1,19 @@
+body {
+    background-color: #a6c7fc;
+}
+
+p {
+    text-align: center;
+}
+
+body {
+  font: 36px Arial, sans-serif;
+}
+
+#container {
+  color: white;
+  background: #ffbd17;
+  width: 400px;
+  height: 260px;
+}
+

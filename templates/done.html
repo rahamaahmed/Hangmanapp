@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-	<p>{{message}}</p>
-
-<form action="{{ url_for('setup') }}" method="POST" id="form1">
-</form>
-
-<button type="submit" form="form1" value="Try Again">Try Again</button>
-
-</body>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/designlayout.css') }}">
+	</head>
+	<body>
+		<div>
+			<p>{{message}}</p>
+			<form action="{{ url_for('setup') }}" method="POST">
+				<input type="submit" name="form1" value="Try Again">
+			</form>
+			<form action="{{ url_for('main') }}" method="POST">
+				<input type="submit" name="quit" value="Quit Game">
+			</form>
+		</div>
+	</body>
 </html>

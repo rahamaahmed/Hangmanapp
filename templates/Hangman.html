@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-<h2>Hangman By:Rahma Ahmed</h2>
-
-<h2>choose diffculty level Hard or Average</h2>
-
-<form action="{{ url_for('main') }}" method="POST">
-		<input type="submit" name="difficulty" value="Normal">
-		<input type="submit" name="difficulty" value="Hard">
-</form>
-
-<form action="{{ url_for('setup') }}" method="POST">
-		<input type="submit" name="form1" value="Submit">
-</form>
-
-</body>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/designlayout.css') }}">
+	</head>
+	<body>
+		<div class="center">
+			<img src="{{ url_for('static',filename='hangman.jpg') }}" alt="Hangman">
+			<form action="{{ url_for('main') }}" method="POST">
+				<label id="level">Choose difficulty level:</label>
+				<input class="button" type="submit" name="difficulty" value="Normal">
+				<input class="button" type="submit" name="difficulty" value="Hard">
+			</form>
+			<form action="{{ url_for('setup') }}" method="POST">
+				<input class="button" type="submit" name="form1" value="Start Game">
+			</form>
+		</div>
+	</body>
 </html>

@@ -21,10 +21,10 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 def get_word(words,difficulty_level):
 	while True:
 		temp_random_word =(random.choice(words)).lower()
-		if difficulty_level=='Normal' and len(set(temp_random_word))<=7:
+		if difficulty_level=='Normal' and len(set(temp_random_word))<=6:
 			session['random_word']=temp_random_word
 			break
-		elif difficulty_level=='Hard' and len(set(temp_random_word))>7:
+		elif difficulty_level=='Hard' and len(set(temp_random_word))>6:
 			session['random_word'] = temp_random_word
 			break
 
@@ -62,7 +62,7 @@ def setup():
 @app.route('/game', methods=['GET','POST'])
 def game():
 	if request.method == 'POST': 
-		if session['Counter'] < 8:
+		if session['Counter'] < 9: #change 12 stand
 			session['textbox']=request.form['text']
 			#print(session['textbox'])
 			Word_list=session.get('Word_list',None)
@@ -104,15 +104,27 @@ def game():
 @app.route('/done', methods=['GET','POST'])
 def done():
 	message=" You " +session['game_status'] +". You had a total of " + str(session['Counter']) + " tries. Would you like to try again?"
+	if request.method == 'POST':  
+		print('Hello world!HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH', file=sys.stderr)
+		if request.form['form1'] == 'Try Again':
+			print('Hello world!IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII', file=sys.stderr)
+			return redirect(url_for('setup'))
+		if request.form['quit'] == 'Quit Game':
+			print('Hello world!UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU', file=sys.stderr)
+			return redirect(url_for('main'))
 	return render_template("done.html",message=message)
 
 if __name__ == "__main__":
 	app.run(debug=True)
 
 """
-check the try agian
-cross letters from a-z
+block letters from a-z
 visual hangman image
 make the site look good
 api/topic/hint
+topic
+counting w/l
+not chossing word after
+no pt if use hint
 """
+

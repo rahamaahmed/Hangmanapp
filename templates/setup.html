@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-<p>{{random_word}}</p>
-<p>{{Word_list}}</p>
-<p>{{blank_word}}</p>
-<p>{{words}}</p>
-<p>{{Word_length}}</p>
-
- <form action="{{ url_for('game') }}" method="POST">
-        <input type="text" name="text">
-        <input type="submit" name="my-game" value="Send">
- </form>
-
-</body>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/designlayout.css') }}">
+	</head>
+	<body>
+		<div>
+			<!--<p>{{random_word}}</p>
+			<p>{{Word_list}}</p>
+			<p>{{words}}</p>
+			<p>{{Word_length}}</p> -->
+			<p>{{blank_word}}</p>
+			<form action="{{ url_for('game') }}" method="POST">
+			        <input type="text" name="text">
+			        <input type="submit" name="my-game" value="Send">
+			</form>
+		</div>
+	</body>
 </html>
