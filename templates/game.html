@@ -2,6 +2,122 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/designlayout.css') }}">
+		<style>
+		        html, body {
+		          width:  100%;
+		          height: 100%;
+		          margin: 0px;
+		        }
+	    </style>
+	    <script>
+	    	function drawStand()
+	    	{
+	    		var w = window.innerWidth;
+	            var h = window.innerHeight;
+	            var mine = document.getElementById('mine');
+	            if(mine.getContext)
+	            {
+	                context = mine.getContext("2d");
+	                with(mine)
+	                {
+	                    setAttribute("width", w - 6)
+	                    setAttribute("height", h - 6)
+	                }
+	                with(context)
+	                {
+	                    strokeStyle = "white";
+	                    lineWidth = "5";
+			   		
+			   			moveTo(w/3, h-(h/50)-30);
+	                	lineTo(w/2-40, h-(h/50)-30);
+
+	                    stroke();
+	                }
+	            }
+	        }
+	        
+	        function drawMan(incorrect_letters_counter)
+	        {
+	            var w = window.innerWidth;
+	            var h = window.innerHeight;
+	            var canvas = document.getElementById('myCanvas');
+	            if(canvas.getContext)
+	            {
+	                context = canvas.getContext("2d");
+	                with(canvas)
+	                {
+	                    setAttribute("width", w - 6)
+	                    setAttribute("height", h - 6)
+	                }
+	                with(context)
+	                {
+	                    strokeStyle = "white";
+	                    lineWidth = "5";
+			   			/*
+	                        Draw Head
+	                    */
+	                    if (incorrect_letters_counter >=1)
+	                    {
+	                    	arc(w/2, ((h/2)+25), h/15, 0, Math.PI*2, true);
+	                	}
+	                    /*
+	                        Draw Neck
+	                    */
+	                    if (incorrect_letters_counter >=2)
+	                    {
+			   				moveTo(w/2, h/2+(h/10));
+	                    	lineTo(w/2, h-(h/2.9));
+	                	}
+			   			/*
+	                        Draw Arm1
+	                    */
+	                    if (incorrect_letters_counter >=3)
+	                    {
+	                    	moveTo(w/2, (h/2+(h/20) +  h-(h/4))/2);
+	                    	lineTo(w/2+h/10, (h/2+(h/20) +  h-(h/4))/2);
+	                	}
+			    		/*
+	                        Draw Arm2
+	                    */
+	                    if (incorrect_letters_counter >= 4)
+	                    {
+	                   		moveTo(w/2, (h/2+(h/20) +  h-(h/4))/2);
+	                    	lineTo(w/2-h/10, (h/2+(h/20) +  h-(h/4))/2);
+	                	}
+	                    /*
+	                        Draw Chest
+	                    */
+	                    if (incorrect_letters_counter >= 5)
+	                    {
+			    			moveTo(w/2, h-(h/2.9));
+	                    	lineTo(w/2, h-(h/5));
+	                	}
+	                    /*
+	                        Draw Leg1
+	                    */
+	                    if (incorrect_letters_counter >= 6)
+	                    {
+	                    	moveTo(w/2, h-(h/5));
+	                    	lineTo(w/2+(h/20), h-(h/50)-30);
+	                	}
+			    		/*
+	                        Draw Leg2
+	                    */
+	                    if (incorrect_letters_counter >= 7)
+	                    {
+	                    	moveTo(w/2, h-(h/5));
+	                    	lineTo(w/2-(h/20), h-(h/50)-30);
+	                    }
+	                    stroke();
+	                }
+	            }
+	        }
+	        window.onresize = function() 
+	        {
+	            drawMan(incorrect_letters_counter);
+	            drawStand();
+	        }
+	    </script> 
 	</head>
 	<body>
 		<div>
@@ -10,6 +126,7 @@
 		    <p>{{lost}}</p>
 		    <p>{{letter_choice}}</p>
 		    <p>{{incorrect_letters}}</p>
+		    <p>{{incorrect_letters_counter}}</p>
 		    <p>{{used}}</p>
 		    <p>{{used_letters}}</p>
 		    <form action="{{ url_for('game') }}" method="POST">
@@ -17,5 +134,11 @@
 		        <input type="submit" name="my-game" value="Send">
 			</form>
 		</div>
+		<canvas id='myCanvas'></canvas>
+		<canvas id='mine'></canvas>
+    	<script>
+    		drawStand()
+       		drawMan({{incorrect_letters_counter}})
+   		</script>
 	</body>
 </html>

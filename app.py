@@ -56,6 +56,7 @@ def setup():
 	session['Counter'] = 0
 	session['used_letters']=[]
 	session['incorrect_letters']=[]
+	session['incorrect_letters_counter']=0
 	return render_template("setup.html",random_word=session['random_word'],
 		Word_list=session['Word_list'],blank_word=session['blank_word'],words=words,Word_length=session['Word_length'])
 
@@ -73,9 +74,11 @@ def game():
 			if re.match("^[a-z]*$", letter_choice) and len(letter_choice) == 1:
 				used_letters=session.get('used_letters',None)
 				incorrect_letters=session.get('incorrect_letters',None)
+				incorrect_letters_counter=session.get('incorrect_letters_counter',None)
 				if letter_choice not in session['random_word']:
 					print('Hello world!DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', file=sys.stderr)
 					incorrect_letters.extend(letter_choice)
+					session['incorrect_letters_counter']=session['incorrect_letters_counter']+1
 				if letter_choice not in used_letters:
 					print('Hello world!BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB', file=sys.stderr)
 					used_letters.extend(letter_choice)
@@ -88,14 +91,14 @@ def game():
 								session['game_status'] = 'won'
 								return redirect(url_for('done'))
 					session['Counter'] = session['Counter'] + 1
-					return render_template("game.html",blank_list=session['blank_list'], letter_choice=letter_choice, used_letters=used_letters,incorrect_letters=incorrect_letters), #incorrect_letters=incorrect_letters)
+					return render_template("game.html",blank_list=session['blank_list'], letter_choice=letter_choice, used_letters=used_letters,incorrect_letters=incorrect_letters,incorrect_letters_counter=session['incorrect_letters_counter'])
 				else:
 					print('Hello world!AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', file=sys.stderr)
 					error="You have already tried the letter '" + letter_choice + "', try agian"
 					return render_template("game.html",blank_list=session['blank_list'],error=error,used_letters=used_letters)
 			else:
 				error="Error! Only letters a-z and 1 characters allowed!, try again"
-				session['Counter'] = session['Counter'] + 1
+				#session['Counter'] = session['Counter'] + 1
 				return render_template("game.html",blank_list=session['blank_list'],error=error)
 		else:
 			session['game_status'] = 'lost'
