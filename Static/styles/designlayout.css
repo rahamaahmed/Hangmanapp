@@ -24,3 +24,8 @@ img {
 .button {
     font-size: 18px;
 }
+
+#myCanvas {
+	width: 47%;
+	border: 1px solid green;
+}

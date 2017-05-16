@@ -10,33 +10,7 @@
 		        }
 	    </style>
 	    <script>
-	    	function drawStand()
-	    	{
-	    		var w = window.innerWidth;
-	            var h = window.innerHeight;
-	            var mine = document.getElementById('mine');
-	            if(mine.getContext)
-	            {
-	                context = mine.getContext("2d");
-	                with(mine)
-	                {
-	                    setAttribute("width", w - 6)
-	                    setAttribute("height", h - 6)
-	                }
-	                with(context)
-	                {
-	                    strokeStyle = "white";
-	                    lineWidth = "5";
-			   		
-			   			moveTo(w/3, h-(h/50)-30);
-	                	lineTo(w/2-40, h-(h/50)-30);
-
-	                    stroke();
-	                }
-	            }
-	        }
-	        
-	        function drawMan(incorrect_letters_counter)
+	        function drawHangman(incorrect_letters_counter)
 	        {
 	            var w = window.innerWidth;
 	            var h = window.innerHeight;
@@ -52,7 +26,30 @@
 	                with(context)
 	                {
 	                    strokeStyle = "white";
+	                    lineWidth = "8";
+
+        	    		beginPath();
+			   		
+			   			moveTo(w/3, h-(h/50)-30);
+		            	lineTo(w/2-30, h-(h/50)-30);
+
+		            	moveTo(w/3+40, h-(h/50)-30);
+		            	lineTo(w/3+40, h/2-40);
+
+		            	moveTo(w/3+40, h/2-40);
+		            	lineTo(w/2,h/2-40);
+
+		            	closePath();
+
+		                stroke(); 
+
+		                beginPath(); 
+
+		                strokeStyle = "white";
 	                    lineWidth = "5";
+
+	                    beginPath();
+
 			   			/*
 	                        Draw Head
 	                    */
@@ -108,14 +105,20 @@
 	                    	moveTo(w/2, h-(h/5));
 	                    	lineTo(w/2-(h/20), h-(h/50)-30);
 	                    }
+
+	                    closePath();
+
 	                    stroke();
 	                }
 	            }
 	        }
+	       /* function drawStand()
+	    	{
+	    		      
+	        }*/
 	        window.onresize = function() 
 	        {
-	            drawMan(incorrect_letters_counter);
-	            drawStand();
+	            drawHangman(incorrect_letters_counter);
 	        }
 	    </script> 
 	</head>
@@ -134,11 +137,11 @@
 		        <input type="submit" name="my-game" value="Send">
 			</form>
 		</div>
-		<canvas id='myCanvas'></canvas>
-		<canvas id='mine'></canvas>
+		<div>
+			<canvas id='myCanvas'></canvas>
+		</div>
     	<script>
-    		drawStand()
-       		drawMan({{incorrect_letters_counter}})
+       		drawHangman({{incorrect_letters_counter}})
    		</script>
 	</body>
 </html>
