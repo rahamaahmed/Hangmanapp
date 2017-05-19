@@ -20,8 +20,8 @@
 	                context = canvas.getContext("2d");
 	                with(canvas)
 	                {
-	                    setAttribute("width", w - 6)
-	                    setAttribute("height", h - 6)
+	                    setAttribute("width", w-6)
+	                    setAttribute("height", h-6)
 	                }
 	                with(context)
 	                {
@@ -123,22 +123,26 @@
 	    </script> 
 	</head>
 	<body>
-		<div>
-		    <p>{{blank_list}}</p>
-		    <p>{{error}}</p>
-		    <p>{{lost}}</p>
-		    <p>{{letter_choice}}</p>
-		    <p>{{incorrect_letters}}</p>
-		    <p>{{incorrect_letters_counter}}</p>
-		    <p>{{used}}</p>
-		    <p>{{used_letters}}</p>
-		    <form action="{{ url_for('game') }}" method="POST">
-		        <input type="text" name="text">
-		        <input type="submit" name="my-game" value="Send">
-			</form>
-		</div>
-		<div>
-			<canvas id='myCanvas'></canvas>
+		<div class="inline">
+			<div class="center">
+				<label id="level">
+				    <p>{{blank_list}}</p>
+				    <p>{{error}}</p>
+				    <p>{{lost}}</p>
+				    <p>{{letter_choice}}</p>
+				    <p>{{incorrect_letters}}</p>
+				    <p>{{incorrect_letters_counter}}</p>
+				    <p>{{used}}</p>
+				    <p>{{used_letters}}</p>
+				</label>
+			    <form action="{{ url_for('game') }}" method="POST">
+			        <input type="text" name="text">
+			        <input type="submit" name="my-game" value="Send">
+				</form>
+			</div>
+			<div>
+				<canvas id='myCanvas'></canvas>
+			</div>
 		</div>
     	<script>
        		drawHangman({{incorrect_letters_counter}})

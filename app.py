@@ -70,11 +70,11 @@ def game():
 			blank_list=session.get('blank_list',None)
 			letter_choice=session.get('textbox',None)
 			letter_choice=letter_choice.lower()
+			used_letters=session.get('used_letters',None)
+			incorrect_letters=session.get('incorrect_letters',None)
+			incorrect_letters_counter=session.get('incorrect_letters_counter',None)
 			#cross letter from list
 			if re.match("^[a-z]*$", letter_choice) and len(letter_choice) == 1:
-				used_letters=session.get('used_letters',None)
-				incorrect_letters=session.get('incorrect_letters',None)
-				incorrect_letters_counter=session.get('incorrect_letters_counter',None)
 				if letter_choice not in session['random_word']:
 					print('Hello world!DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', file=sys.stderr)
 					incorrect_letters.extend(letter_choice)
@@ -95,11 +95,11 @@ def game():
 				else:
 					print('Hello world!AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', file=sys.stderr)
 					error="You have already tried the letter '" + letter_choice + "', try agian"
-					return render_template("game.html",blank_list=session['blank_list'],error=error,used_letters=used_letters)
+					return render_template("game.html",blank_list=session['blank_list'],error=error,used_letters=used_letters,incorrect_letters=incorrect_letters,incorrect_letters_counter=session['incorrect_letters_counter'])
 			else:
 				error="Error! Only letters a-z and 1 characters allowed!, try again"
 				#session['Counter'] = session['Counter'] + 1
-				return render_template("game.html",blank_list=session['blank_list'],error=error)
+				return render_template("game.html",blank_list=session['blank_list'],error=error,used_letters=used_letters,incorrect_letters=incorrect_letters,incorrect_letters_counter=session['incorrect_letters_counter'])
 		else:
 			session['game_status'] = 'lost'
 			return redirect(url_for('done'))
