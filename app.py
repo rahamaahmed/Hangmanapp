@@ -1,4 +1,5 @@
 from __future__ import print_function
+from flask_sqlalchemy import SQLAlchemy
 from random import randint
 import os, json, re
 import flask
@@ -18,9 +19,23 @@ from flask import (
 )
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:hellokitty@localhost/flask_hangman'
+db=SQLAlchemy(app)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 tmdb.API_KEY = '3ed0121bfe2f634e5aff3cc6c826fa8a'
+
+class GameInfo(db.Model):
+	id = db.Column(db.Integer, primary_key=True) 
+	difficulty = db.Column(db.String(80))
+	numtries = db.Column(db.Integer)
+	status = db.Column(db.String(10))
+
+
+	def __init__(self,difficulty,numtries,status):
+		self.difficulty = difficulty
+		self.numtries = numtries
+		self.status = status
 
 def get_word(difficulty_level):
 	while True:
@@ -141,6 +156,9 @@ def game():
 @app.route('/done', methods=['GET','POST'])
 def done():
 	message=" You " +session['game_status'] +". You had a total of " + str(session['Counter']) + " tries. Would you like to try again?"
+	gameinfo = GameInfo(session['difficulty_level'],session['Counter'],session['game_status'])
+	db.session.add(gameinfo)
+	db.session.commit()
 	if request.method == 'POST':  
 		if request.form['form1'] == 'Try Again':
 			return redirect(url_for('setup'))
@@ -159,6 +177,7 @@ not chossing word after
 no pt if use hint
 
 database
+
 api/topic/hint
 """
 
