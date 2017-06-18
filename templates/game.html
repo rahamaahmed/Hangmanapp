@@ -25,7 +25,7 @@
 	                }
 	                with(context)
 	                {
-	                    strokeStyle = "white";
+	                    strokeStyle = "black";/**/
 	                    lineWidth = "8";
 
         	    		beginPath();
@@ -45,7 +45,7 @@
 
 		                beginPath(); 
 
-		                strokeStyle = "white";
+		                strokeStyle = "black"; /**/
 	                    lineWidth = "5";
 
 	                    beginPath();
@@ -123,29 +123,31 @@
 	    </script> 
 	</head>
 	<body>
+		<div id="grad3">
 		<div class="inline">
-			<div class="center">
+			<div class="centerr">
 				<label id="level">
 					<p><pre>{{visual_blank_word}}</pre></p>
-				    <p>{{blank_list}}</p>
-				    <p>{{error}}</p>
-				    <p>{{lost}}</p>
-				    <p>{{letter_choice}}</p>
+					<p>{{error}}</p>
+					<p>{{lost}}</p>
+				    <!--<p>{{letter_choice}}</p>
 				    <p>{{incorrect_letters}}</p>
 				    <p>{{incorrect_letters_counter}}</p>
-				    <p>{{used_letters}}</p>
+				    <p>{{used_letters}}</p>-->
 				</label>
 			    <form action="{{ url_for('game') }}" method="POST">
-			        <input type="text" name="text">
-			        <input type="submit" name="my-game" value="Send">
+			        <input type="text" name="text" autocomplete="off"><br>
+			        <input class=button type="submit" name="my-game" value="Send">
 				</form>
 			</div>
 			<div>
 				<canvas id='myCanvas'></canvas>
 			</div>
 		</div>
+		</div>
     	<script>
        		drawHangman({{incorrect_letters_counter}})
    		</script>
 	</body>
+	<footer> © 2017 Rahma Ahmed. All rights reserved </footer>
 </html>

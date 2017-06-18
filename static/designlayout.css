@@ -1,25 +1,107 @@
-body {
-    background-color: black;
+
+footer {
+    padding: 1em;
     color: white;
-}
-#level {
-	font-family: "Lucida Console", Monaco, monospace;
-	color: white;
-	font-size: 16px;
-}
-
-.pg1 {
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-    margin-top: 200px;
+    background-color: black;
+    text-align: center;
+    position:fixed;
+    bottom:0;
+    width: 100%;
 }
 
-.center {
-    float: left;
-    width: 30%;
-    margin-left: 125px;
-    margin-top: 325px;
+body {
+    font-family: "Lato", sans-serif;
+    color: black; 
+    margin: 0px;
+    padding-top: 45px;
+    height: 100%; 
+    overflow: hidden;
+    background: linear-gradient(#4B79A1, #283E51);
+}
+
+h1 {
+     font-size: 64px;
+     text-align: center;
+     margin: 0px;
+}
+
+p{
+    font-size: 18px;
+    font-family: "Lato", sans-serif;
+}
+
+.p2{
+    font-size: 24px;
+    font-family: "Lato", sans-serif;
+    display: inline-block;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.p3{
+    font-size: 20px;
+    font-family: "Lato", sans-serif;
+    text-align: center;
+    margin-top: 20%;
+}
+
+.form1{
+    text-align: center;
+}
+
+#pushdown{
+    margin-top: 10px;
+}
+
+#pushdown1{
+    margin-top: 10px;
+    margin-left: 43%;
+}
+
+#grad1 {
+    height: 1000px;
+    background: blue; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#4B79A1, #283E51); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#4B79A1, #283E51); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#4B79A1, #283E51); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#4B79A1, #283E51); /* Standard syntax (must be last) */
+    margin-top: 15%;
+}
+
+#grad2 {
+    height: 1000px;
+    background: blue; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#4B79A1, #283E51); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#4B79A1, #283E51); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#4B79A1, #283E51); /* For Firefox 3.6 to 15 */
+    background: transparent; /* Standard syntax (must be last) */
+    margin-top: 15%;
+}
+
+#grad3 {
+    height: 1000px;
+    background: blue; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#4B79A1, #283E51); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#4B79A1, #283E51); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#4B79A1, #283E51); /* For Firefox 3.6 to 15 */
+    background: transparent; /* Standard syntax (must be last) */
+}
+
+.button {
+    background-color: black;
+    border: none;
+    color: white;
+    display: inline-block;
+    margin: 0 10px 0 0;
+    padding: 15px 45px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: "Lato", sans-serif;
+    border-radius: 8px;
 }
 
 img {
@@ -29,8 +111,29 @@ img {
     margin-bottom: 35px;
 }
 
-.button {
-    font-size: 18px;
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.pg1 {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    /*padding: 10px;
+    margin-top: 200px;*/
+}
+
+.centerr {
+    float: left;
+    width: 30%;
+    margin-left: 125px;
+    margin-top: 275px;
 }
 
 #myCanvas {
@@ -38,7 +141,6 @@ img {
 	float: left;
 	border: 1px;
 	margin-top: 75px;
-	
 }
 
 .inline {

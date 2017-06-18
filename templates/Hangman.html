@@ -2,18 +2,24 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='designlayout.css') }}">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 	</head>
-	<body>
+	<body id="grad1">
+		<div id="level">
 		<div class="pg1">
-			<img src="{{ url_for('static',filename='hangman.jpg') }}" alt="Hangman">
-			<form action="{{ url_for('main') }}" method="POST">
-				<label id="level">Choose difficulty level:</label>
+			<!--<img src="{{ url_for('static',filename='hangman.jpg') }}" alt="Hangman">-->
+			<h1>HANGMAN</h1>
+			<p class="p2"> For Movies </p>
+			<form class="form1" action="{{ url_for('main') }}" method="POST">
+				<!--<label id="level">Choose difficulty level:</label>-->
 				<input class="button" type="submit" name="difficulty" value="Normal">
 				<input class="button" type="submit" name="difficulty" value="Hard">
 			</form>
-			<form action="{{ url_for('setup') }}" method="POST">
-				<input class="button" type="submit" name="form1" value="Start Game">
+			<form class="form1" action="{{ url_for('setup') }}" method="POST">
+				<input id="pushdown" class="button" type="submit" name="form1" value="Start Game">
 			</form>
 		</div>
+		</div>
 	</body>
+	<footer> © 2017 Rahma Ahmed. All rights reserved </footer>
 </html>

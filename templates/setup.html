@@ -4,18 +4,21 @@
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='designlayout.css') }}">
 	</head>
 	<body>
+		<div id="grad2">
 		<div class="pg1">
 			<label id="level">
-				<p>{{random_word}}</p>
+				<!--<p>{{random_word}}</p>
 				<p>{{Word_list}}</p>
-				<p>{{Word_length}}</p> 
+				<p>{{Word_length}}</p>
+				<p>{{blank_list}}</p> -->
 				<p><pre>{{blank_word}}</pre></p>
-				<p>{{blank_list}}</p>
 			</label>
 			<form action="{{ url_for('game') }}" method="POST">
-			        <input type="text" name="text">
-			        <input type="submit" name="my-game" value="Send">
+			        <input type="text" name="text" autocomplete="off"><br>
+			        <input class="button" type="submit" name="my-game" value="Send">
 			</form>
 		</div>
+		</div>
 	</body>
+	<footer> © 2017 Rahma Ahmed. All rights reserved </footer>
 </html>
