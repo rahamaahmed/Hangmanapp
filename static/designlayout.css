@@ -23,11 +23,27 @@ h1 {
      font-size: 64px;
      text-align: center;
      margin: 0px;
+     text-decoration: underline;
 }
 
 p{
     font-size: 18px;
     font-family: "Lato", sans-serif;
+}
+
+#iconhelp { 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    right: 100%;
+    top: 0%; 
+    position: absolute;
+}
+#iconcontact { 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    right: 100%;
+    top: 5%;
+    position: absolute;
 }
 
 .p2{
@@ -61,7 +77,7 @@ p{
 }
 
 #grad1 {
-    height: 1000px;
+    height: 610px;
     background: blue; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(#4B79A1, #283E51); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#4B79A1, #283E51); /* For Opera 11.1 to 12.0 */
@@ -71,7 +87,7 @@ p{
 }
 
 #grad2 {
-    height: 1000px;
+    height: 610px;
     background: blue; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(#4B79A1, #283E51); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#4B79A1, #283E51); /* For Opera 11.1 to 12.0 */
@@ -81,7 +97,7 @@ p{
 }
 
 #grad3 {
-    height: 1000px;
+    height: 610px;
     background: blue; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(#4B79A1, #283E51); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#4B79A1, #283E51); /* For Opera 11.1 to 12.0 */

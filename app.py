@@ -39,18 +39,29 @@ class GameInfo(db.Model):
 
 def get_word(difficulty_level):
 	while True:
-		random_num = randint(20,700) #4
+		print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', file=sys.stderr)
+		random_num = randint(200,250) #4
+		print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB', file=sys.stderr)
 		temp_random_word = tmdb.Movies(random_num)
+		print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC', file=sys.stderr)
 		response = temp_random_word.info()
+		print('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', response, file=sys.stderr)
+		json_obj = json.dumps(response)
+		json_size = len(json_obj)
+		print('KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK', json_size, file=sys.stderr)
 		temp_random_word = temp_random_word.title
+		print('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE', file=sys.stderr)
 		print(temp_random_word, file=sys.stderr)
 		if re.match('^[^<!@#$%^&*():;0-9>]+$', temp_random_word):
+			session['correct_answer']=temp_random_word
 			if difficulty_level=='Normal' and len(set(temp_random_word))<=7:
 				session['random_word']=temp_random_word.lower()
 				break
-			elif difficulty_level=='Hard' and len(set(temp_random_word))>6: #and len(set(temp_random_word))<=10
+			elif difficulty_level=='Hard' and len(set(temp_random_word))>7 and len(set(temp_random_word))<=10:
 				session['random_word'] = temp_random_word.lower()
 				break
+
+
 
 def convert_letter(word):
     new_word = word
@@ -147,18 +158,21 @@ def game():
 					return render_template("game.html",visual_blank_word=visual_blank_word,blank_list=session['blank_list'], letter_choice=letter_choice, used_letters=used_letters,incorrect_letters=incorrect_letters,incorrect_letters_counter=session['incorrect_letters_counter'])
 				else:
 					error="You have already tried the letter '" + letter_choice + "', try agian"
-					return render_template("game.html",blank_list=session['blank_list'],error=error,used_letters=used_letters,incorrect_letters=incorrect_letters,incorrect_letters_counter=session['incorrect_letters_counter'])
+					return render_template("game.html",visual_blank_word=visual_blank_word, blank_list=session['blank_list'],error=error,used_letters=used_letters,incorrect_letters=incorrect_letters,incorrect_letters_counter=session['incorrect_letters_counter'])
 			else:
 				error="Error! Only letters a-z and 1 characters allowed!, try again"
 				#session['Counter'] = session['Counter'] + 1
-				return render_template("game.html",blank_list=session['blank_list'],error=error,used_letters=used_letters,incorrect_letters=incorrect_letters,incorrect_letters_counter=session['incorrect_letters_counter'])
+				return render_template("game.html",visual_blank_word=visual_blank_word, blank_list=session['blank_list'],error=error,used_letters=used_letters,incorrect_letters=incorrect_letters,incorrect_letters_counter=session['incorrect_letters_counter'])
 		else:
 			session['game_status'] = 'lost'
 			return redirect(url_for('done'))
 
 @app.route('/done', methods=['GET','POST'])
 def done():
-	message=" You " +session['game_status'] +". You had a total of " + str(session['Counter']) + " tries. Would you like to try again?"
+	if session['game_status'] == 'lost':
+		message=" You " +session['game_status'] +" and a total of " + str(session['Counter']) + " tries. The correct answer was " +session['correct_answer']+ " . Would you like to try again?"
+	else:
+		message=" You " +session['game_status'] +" and a total of " + str(session['Counter']) + " tries. Would you like to try again?"
 	gameinfo = GameInfo(session['difficulty_level'],session['Counter'],session['game_status'])
 	db.session.add(gameinfo)
 	db.session.commit()
@@ -174,23 +188,16 @@ if __name__ == "__main__":
 
 """
 block letters from a-z
-topic
+show poster
+add help and contact
+
 counting w/l
 not chossing word after
 no pt if use hint
-
 database
+hint
 
-api/topic/hint
-
-
-
-
-too long
-error blank disappears
-button on done broken
 api not work
-tell name when lose
-show poster
+button on done broken
+fix hangman image
 """
-
