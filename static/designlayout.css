@@ -1,8 +1,7 @@
-
 footer {
     padding: 1em;
     color: white;
-    background-color: black;
+    background-color: #E684AE;
     text-align: center;
     position:fixed;
     bottom:0;
@@ -13,58 +12,49 @@ body {
     font-family: "Lato", sans-serif;
     color: black; 
     margin: 0px;
-    padding-top: 45px;
+    padding-top: 0 !important;
     height: 100%; 
     overflow: hidden;
-    background: linear-gradient(#4B79A1, #283E51);
 }
 
 h1 {
-     font-size: 64px;
+     font-size: 110px;
      text-align: center;
+     vertical-align: middle;
      margin: 0px;
      text-decoration: underline;
+     text-decoration-color: #E684AE;
+     margin-top: 50px;  
 }
 
 p{
     font-size: 18px;
     font-family: "Lato", sans-serif;
-}
-
-#iconhelp { 
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    right: 100%;
-    top: 0%; 
-    position: absolute;
-}
-#iconcontact { 
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    right: 100%;
-    top: 5%;
-    position: absolute;
-}
-
-.p2{
-    font-size: 24px;
-    font-family: "Lato", sans-serif;
-    display: inline-block;
-    font-weight: bold;
     margin-top: 0px;
-    margin-bottom: 25px;
-    text-align: center;
 }
 
-.p3{
-    font-size: 20px;
-    font-family: "Lato", sans-serif;
-    text-align: center;
-    margin-top: 20%;
+img {
+    display: inline;
+    position: absolute;
+    left: 10px;
+    top: 10px;
 }
 
-.form1{
-    text-align: center;
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#myCanvas {
+    width: 60%;
+    float: left;
+    border: 1px;
+    margin-top: 75px;
 }
 
 #pushdown{
@@ -76,14 +66,28 @@ p{
     margin-left: 43%;
 }
 
-#grad1 {
-    height: 610px;
-    background: blue; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#4B79A1, #283E51); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#4B79A1, #283E51); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#4B79A1, #283E51); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#4B79A1, #283E51); /* Standard syntax (must be last) */
-    margin-top: 15%;
+#pushdown2{
+    margin-top: 450px;
+    padding-bottom: 50px;
+}
+
+#section {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%) 
+}
+
+.grad1 {
+    display:inline-block;
+    background:blue; /* For browsers that do not support gradients */
+    background:-webkit-linear-gradient(#77A1D3, #79CBCA,#E684AE); /* For Safari 5.1 to 6.0 */
+    background:-o-linear-gradient(#77A1D3, #79CBCA,#E684AE); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#77A1D3, #79CBCA,#E684AE); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#77A1D3, #79CBCA,#E684AE); /* Standard syntax (must be last) */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #grad2 {
@@ -105,36 +109,39 @@ p{
     background: transparent; /* Standard syntax (must be last) */
 }
 
-.button {
-    background-color: black;
-    border: none;
-    color: white;
+.p2{
+    font-size: 24px;
+    font-family: "Lato", sans-serif;
     display: inline-block;
-    margin: 0 10px 0 0;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.p3{
+    font-size: 20px;
+    font-family: "Lato", sans-serif;
+    text-align: center;
+}
+
+.form1{
+    text-align: center;
+}
+
+.button {
+    background-color: white;
+    border: 2px solid grey;
+    color: black;
+    display: inline-block;
+    margin: 0 10px 0 10px;
     padding: 15px 45px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     font-family: "Lato", sans-serif;
     border-radius: 8px;
-}
-
-img {
-    display: block;
-    margin: auto;
-    width: 100%;
-    margin-bottom: 35px;
-}
-
-input[type=text], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .pg1 {
@@ -152,14 +159,26 @@ input[type=text], select {
     margin-top: 275px;
 }
 
-#myCanvas {
-	width: 60%;
-	float: left;
-	border: 1px;
-	margin-top: 75px;
-}
 
 .inline {
 	margin: auto;
 	width: 100%;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #77A1D3;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }

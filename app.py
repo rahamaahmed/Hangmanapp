@@ -6,7 +6,7 @@ import flask
 import random
 import sys
 import tmdbsimple as tmdb
-
+import requests
 
 from flask import (
 	Flask, 
@@ -31,7 +31,6 @@ class GameInfo(db.Model):
 	numtries = db.Column(db.Integer)
 	status = db.Column(db.String(10))
 
-
 	def __init__(self,difficulty,numtries,status):
 		self.difficulty = difficulty
 		self.numtries = numtries
@@ -39,18 +38,13 @@ class GameInfo(db.Model):
 
 def get_word(difficulty_level):
 	while True:
-		print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', file=sys.stderr)
-		random_num = randint(200,250) #4
-		print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB', file=sys.stderr)
+		random_num = randint(5,750) #4
 		temp_random_word = tmdb.Movies(random_num)
-		print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC', file=sys.stderr)
-		response = temp_random_word.info()
-		print('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', response, file=sys.stderr)
-		json_obj = json.dumps(response)
-		json_size = len(json_obj)
-		print('KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK', json_size, file=sys.stderr)
+		try:
+			response = temp_random_word.info()
+		except requests.exceptions.HTTPError as err:
+			continue
 		temp_random_word = temp_random_word.title
-		print('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE', file=sys.stderr)
 		print(temp_random_word, file=sys.stderr)
 		if re.match('^[^<!@#$%^&*():;0-9>]+$', temp_random_word):
 			session['correct_answer']=temp_random_word
@@ -60,8 +54,6 @@ def get_word(difficulty_level):
 			elif difficulty_level=='Hard' and len(set(temp_random_word))>7 and len(set(temp_random_word))<=10:
 				session['random_word'] = temp_random_word.lower()
 				break
-
-
 
 def convert_letter(word):
     new_word = word
@@ -87,13 +79,8 @@ def main():
 
 @app.route('/setup', methods=['GET','POST'])
 def setup():
-	#text_file = open('Hardwords.txt',"r")
-	#words = text_file.read().split(',')
 	get_word(session['difficulty_level'])
-	#text_file.close()
 	session['Word_length'] = len(session['random_word'])
-	#session['blank_word'] = "_ " * session['Word_length']
-	#session['blank_word'] = ''
 	session['Word_list'] = list(session['random_word']) 
 	session['Word_list'] = [item.lower() for item in session['Word_list']]
 	session['blank_word'] = convert_letter(session['random_word'])
@@ -116,7 +103,6 @@ def game():
 	if request.method == 'POST': 
 		if session['Counter'] < 12: #change 12 stand 9
 			session['textbox']=request.form['text']
-			#print(session['textbox'])
 			visual_blank_word=session.get('visual_blank_word',None)
 			Word_list=session.get('Word_list',None)
 			blank_list=session.get('blank_list',None)
@@ -148,7 +134,6 @@ def game():
 							print(letter_choice, file=sys.stderr)
 							print(session['random_word'], file=sys.stderr)
 							if blank_list == Word_list:
-								#print('KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK', file=sys.stderr)
 								print(blank_list, file=sys.stderr)
 								print(Word_list, file=sys.stderr)
 								session['game_status'] = 'won'
@@ -161,7 +146,6 @@ def game():
 					return render_template("game.html",visual_blank_word=visual_blank_word, blank_list=session['blank_list'],error=error,used_letters=used_letters,incorrect_letters=incorrect_letters,incorrect_letters_counter=session['incorrect_letters_counter'])
 			else:
 				error="Error! Only letters a-z and 1 characters allowed!, try again"
-				#session['Counter'] = session['Counter'] + 1
 				return render_template("game.html",visual_blank_word=visual_blank_word, blank_list=session['blank_list'],error=error,used_letters=used_letters,incorrect_letters=incorrect_letters,incorrect_letters_counter=session['incorrect_letters_counter'])
 		else:
 			session['game_status'] = 'lost'
@@ -183,13 +167,21 @@ def done():
 			return redirect(url_for('main'))
 	return render_template("done.html",message=message)
 
+@app.route('/about', methods=['GET','POST'])
+def about():
+	return render_template("about.html")
+
 if __name__ == "__main__":
 	app.run(debug=True)
 
 """
+fix hangman image->bootstrap
 block letters from a-z
 show poster
-add help and contact
+reduce to 2 buttons
+move input down
+
+add option to guess full name
 
 counting w/l
 not chossing word after
@@ -197,7 +189,11 @@ no pt if use hint
 database
 hint
 
-api not work
 button on done broken
-fix hangman image
+counter add when guess smae letter twice
+
+Finished
+api not work
+change button color
+add link for help and contact/about
 """

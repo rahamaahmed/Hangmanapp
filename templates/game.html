@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='designlayout.css') }}">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<style>
 		        html, body {
 		          width:  100%;
@@ -146,9 +146,8 @@
 			</div>
 		</div>
 		</div>
-    	<script>
+    	<script id="section">
        		drawHangman({{incorrect_letters_counter}})
    		</script>
 	</body>
-	<footer> © 2017 Rahma Ahmed. All rights reserved </footer>
 </html>

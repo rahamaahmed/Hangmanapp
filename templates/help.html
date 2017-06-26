@@ -8,24 +8,14 @@
 	<body>
 		<div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-right" style="display:none;right:0;" id="rightMenu">
 		  <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">&times;</button>
-		  <a href="{{ url_for('about') }}" class="w3-bar-item w3-button">About</a>
+		  <a href="#" class="w3-bar-item w3-button">Link 1</a>
+		  <a href="#" class="w3-bar-item w3-button">Link 2</a>
 		</div>
 		<div>
 		  <button class="w3-button w3-white w3-large w3-right" onclick="openRightMenu()">&#9776;</button>
 		</div>
-		<div id="pushdown2">
-		<div class="pg1">
-			<h1 class="grad1" id="section">HANGMAN</h1>
-			<!--<p>For Movies</p>-->
-			<form class="form1" action="{{ url_for('main') }}" method="POST">
-				<!--<label id="level">Choose difficulty level:</label>-->
-				<input class="button" type="submit" name="difficulty" value="Normal">
-				<input class="button" type="submit" name="difficulty" value="Hard">
-			</form>
-			<form class="form1" action="{{ url_for('setup') }}" method="POST">
-				<input id="pushdown" class="button" type="submit" name="form1" value="Start Game">
-			</form>
-		</div>
+		<div id="section">
+			<p>fjdshjafsdkfjdas;fjsfkda;sjfkasfj</p>
 		</div>
 		<script>
 			function openRightMenu() {
@@ -36,5 +26,4 @@
 			}
 		</script>
 	</body>
-	<!--<footer> © 2017 Rahma Ahmed. All rights reserved </footer>-->
 </html>

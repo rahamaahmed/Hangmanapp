@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='designlayout.css') }}">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	</head>
 	<body>
 		<div id="grad2">
-		<div class="pg1">
-			<i id="iconhelp" class="material-icons">help_outline</i>
-   			<i id="iconcontact" class="material-icons">chat_bubble_outline</i>
+		<div class="pg1" id="section">
 			<label id="level">
-				<!--<p>{{random_word}}</p>
-				<p>{{Word_list}}</p>
-				<p>{{Word_length}}</p>
-				<p>{{blank_list}}</p> -->
 				<p><pre>{{blank_word}}</pre></p>
 			</label>
 			<form action="{{ url_for('game') }}" method="POST">
@@ -23,5 +17,4 @@
 		</div>
 		</div>
 	</body>
-	<footer> © 2017 Rahma Ahmed. All rights reserved </footer>
 </html>
