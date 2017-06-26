@@ -176,24 +176,15 @@ if __name__ == "__main__":
 
 """
 fix hangman image->bootstrap
-block letters from a-z
+block letters from a-z or add option to guess full name
 show poster
-reduce to 2 buttons
+print game states?
+counter add when guess same letter twice
 move input down
-
-add option to guess full name
-
-counting w/l
-not chossing word after
-no pt if use hint
-database
-hint
-
-button on done broken
-counter add when guess smae letter twice
 
 Finished
 api not work
 change button color
 add link for help and contact/about
+button on done broken
 """
