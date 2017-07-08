@@ -138,7 +138,7 @@ input[type=text], select {
 
 .button {
     background-color: white;
-    border-style: : solid; /*grey*/
+    border-style: solid; /*grey*/
     border-color: #E684AE;
     border-width: 2px;
     color: black;
