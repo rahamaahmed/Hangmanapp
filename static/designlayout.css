@@ -34,10 +34,12 @@ p{
 }
 
 img {
-    display: inline;
-    position: absolute;
-    left: 10px;
-    top: 10px;
+    display: block;
+    width: 150px;
+    height: auto;
+    margin:auto;
+    margin-top: 200px;
+    margin-left:55%;
 }
 
 input[type=text], select {
@@ -62,8 +64,8 @@ input[type=text], select {
 }
 
 #pushdown1{
-    margin-top: 10px;
-    margin-left: 43%;
+    margin-top: 6px;
+    margin-left: 20px;
 }
 
 #pushdown2{
@@ -77,6 +79,10 @@ input[type=text], select {
         left: 50%;
         margin-right: -50%;
         transform: translate(-50%, -50%) 
+}
+
+#centered{
+    margin-left: 26%;
 }
 
 .grad1 {
@@ -122,7 +128,8 @@ input[type=text], select {
 .p3{
     font-size: 20px;
     font-family: "Lato", sans-serif;
-    text-align: center;
+    text-align: left;
+    margin-right: 50%;
 }
 
 .form1{
@@ -131,17 +138,17 @@ input[type=text], select {
 
 .button {
     background-color: white;
-    border: 2px solid grey;
+    border: 2px solid #E684AE /*grey*/;
     color: black;
     display: inline-block;
     margin: 0 10px 0 10px;
     padding: 15px 45px;
-    text-align: center;
+    /*text-align: center;*/
     text-decoration: none;
     font-size: 16px;
     font-family: "Lato", sans-serif;
     border-radius: 8px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    /*box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/
 }
 
 .pg1 {
@@ -150,6 +157,7 @@ input[type=text], select {
     text-align: center;
     /*padding: 10px;
     margin-top: 200px;*/
+    margin-right: 50%;
 }
 
 .centerr {

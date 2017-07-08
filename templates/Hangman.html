@@ -11,10 +11,10 @@
 		  <a href="{{ url_for('about') }}" class="w3-bar-item w3-button">About</a>
 		</div>
 		<div>
-		  <button class="w3-button w3-white w3-large w3-right" onclick="openRightMenu()">&#9776;</button>
+		<button class="w3-button w3-white w3-large w3-right" onclick="openRightMenu()">&#9776;</button>
 		</div>
 		<div id="pushdown2">
-		<div class="pg1">
+		<div class="pg1" id="centered">
 			<h1 class="grad1" id="section">HANGMAN</h1>
 			<!--<p>For Movies</p>-->
 			<form class="form1" action="{{ url_for('main') }}" method="POST">

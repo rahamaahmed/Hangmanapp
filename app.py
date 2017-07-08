@@ -38,22 +38,27 @@ class GameInfo(db.Model):
 
 def get_word(difficulty_level):
 	while True:
-		random_num = randint(5,750) #4
+		random_num = randint(5,750)
 		temp_random_word = tmdb.Movies(random_num)
 		try:
 			response = temp_random_word.info()
 		except requests.exceptions.HTTPError as err:
 			continue
-		temp_random_word = temp_random_word.title
-		print(temp_random_word, file=sys.stderr)
-		if re.match('^[^<!@#$%^&*():;0-9>]+$', temp_random_word):
-			session['correct_answer']=temp_random_word
-			if difficulty_level=='Normal' and len(set(temp_random_word))<=7:
-				session['random_word']=temp_random_word.lower()
+		temp_random_word_str = temp_random_word.title
+		print(temp_random_word_str, file=sys.stderr)
+		if re.match('^[^<!@#$%^&*():;0-9>]+$', temp_random_word_str):
+			get_poster(temp_random_word)
+			session['correct_answer']=temp_random_word_str
+			if difficulty_level=='Normal' and len(set(temp_random_word_str))<=7:
+				session['random_word']=temp_random_word_str.lower()
 				break
-			elif difficulty_level=='Hard' and len(set(temp_random_word))>7 and len(set(temp_random_word))<=10:
-				session['random_word'] = temp_random_word.lower()
+			elif difficulty_level=='Hard' and len(set(temp_random_word_str))>7 and len(set(temp_random_word_str))<=8:
+				session['random_word'] = temp_random_word_str.lower()
 				break
+
+def get_poster(temp_random_word):
+	response = temp_random_word.images()
+	session['file_path']=response["posters"][0]["file_path"]
 
 def convert_letter(word):
     new_word = word
@@ -101,7 +106,7 @@ def setup():
 @app.route('/game', methods=['GET','POST'])
 def game():
 	if request.method == 'POST': 
-		if session['Counter'] < 12: #change 12 stand 9
+		if session['Counter'] < 8: #change 12 stand 9
 			session['textbox']=request.form['text']
 			visual_blank_word=session.get('visual_blank_word',None)
 			Word_list=session.get('Word_list',None)
@@ -165,7 +170,7 @@ def done():
 			return redirect(url_for('setup'))
 		if request.form['quit'] == 'Quit Game':
 			return redirect(url_for('main'))
-	return render_template("done.html",message=message)
+	return render_template("done.html",message=message,filepath="http://image.tmdb.org/t/p/w780"+session['file_path'])
 
 @app.route('/about', methods=['GET','POST'])
 def about():
@@ -176,14 +181,13 @@ if __name__ == "__main__":
 
 """
 fix hangman image->bootstrap
-block letters from a-z or add option to guess full name
-show poster
-print game states?
+add option to guess full name
 counter add when guess same letter twice
 move input down
 
 Finished
 api not work
+show poster
 change button color
 add link for help and contact/about
 button on done broken
