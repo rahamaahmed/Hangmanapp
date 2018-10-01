@@ -19,7 +19,7 @@ from flask import (
 )
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:hellokitty@localhost/flask_hangman'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/daenpnaj27b2np'
 db=SQLAlchemy(app)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
